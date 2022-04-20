@@ -11,8 +11,8 @@ inputs:
     default: ${{ github.repository }}
   OUTPUT_DIR:  # id of input
     description: 'Where to dump the db'
-    required: true
-    default:  ${{ github.home }}
+    required: false
+    default:  ${{ github.workspace }}
 
 outputs:
   database: # id of output
