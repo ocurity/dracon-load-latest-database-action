@@ -1,0 +1,27 @@
+name: 'Dracon Load Last Database From Artifacts'
+description: 'This is an auxiliary step run with Dracon in order to have enriched results completely on GitHub'
+inputs:
+  GH_ACCESS_TOKEN:  
+    description: 'A personal access token scoped for the repository'
+    required: false
+    default: ${{ github.token }}
+  REPO_URL: 
+    description: 'which repo to download artifacts from'
+    required: false
+    default: ${{ github.repository }}
+  OUTPUT_DIR:  # id of input
+    description: 'Where to dump the db'
+    required: true
+    default:  ${{ github.home }}
+
+outputs:
+  database: # id of output
+    description: 'The sqlite database for the enricher'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.GH_ACCESS_TOKEN }}
+    - ${{ inputs.REPO_URL }}
+    - ${{ inputs.OUTPUT_DIR }}
+  
