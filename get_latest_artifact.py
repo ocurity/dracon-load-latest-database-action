@@ -17,7 +17,7 @@ for art in artifacts:
         latest = d
         artifact_url = art["archive_download_url"]
 
-token = os.environ["GH_ACCESS_TOKEN"]
+token = os.environ["INPUT_GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
 with open("/tmp/latest.zip", "wb") as zip:
@@ -25,4 +25,6 @@ with open("/tmp/latest.zip", "wb") as zip:
         zip.write(chunk)
 
 with zipfile.ZipFile("/tmp/latest.zip") as zip:
-    zip.extractall(os.environ["OUTPUT_DIR"])
+    zip.extractall(os.environ["INPUT_OUTPUT_DIR"])
+
+pprint(os.listdir(os.environ["INPUT_OUTPUT_DIR"]))
