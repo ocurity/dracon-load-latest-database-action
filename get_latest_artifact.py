@@ -17,7 +17,7 @@ for art in artifacts:
         latest = d
         artifact_url = art["archive_download_url"]
 
-token = os.environ["GH_PERSONAL_ACCESS_TOKEN"]
+token = os.environ["GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
 with open("/tmp/latest.zip", "wb") as zip:
