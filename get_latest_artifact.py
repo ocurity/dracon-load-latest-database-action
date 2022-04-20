@@ -25,6 +25,8 @@ with open("/tmp/latest.zip", "wb") as zip:
         zip.write(chunk)
 
 with zipfile.ZipFile("/tmp/latest.zip") as zip:
+    print("Extracting files to %s"%os.environ["INPUT_OUTPUT_DIR"])
     zip.extractall(os.environ["INPUT_OUTPUT_DIR"])
 
+print("Files extracted, dir contents are:")
 pprint(os.listdir(os.environ["INPUT_OUTPUT_DIR"]))
