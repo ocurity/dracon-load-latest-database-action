@@ -4,7 +4,8 @@ import os
 import zipfile
 from pprint import pprint
 
-repo=os.environ["INPUT_REPO_URL"]
+repo=f"https://api.github.com/repos/{os.environ['INPUT_REPO']}/actions/artifacts"
+print(f"retrieving artifacts from repo {repo}")
 artifacts = requests.get(repo).json()['artifacts']
 
 latest = parser.isoparse(artifacts[-1]['updated_at'])

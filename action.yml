@@ -5,10 +5,10 @@ inputs:
     description: 'A personal access token scoped for the repository'
     required: false
     default: ${{ github.token }}
-  REPO_URL: 
+  REPO: 
     description: 'which repo to download artifacts from'
     required: false
-    default: https://github.com/${{ github.repository }}
+    default: ${{ github.repository }}
   OUTPUT_DIR:  # id of input
     description: 'Where to dump the db'
     required: false
