@@ -5,9 +5,10 @@ import zipfile
 from pprint import pprint
 
 repo=f"https://api.github.com/repos/{os.environ['INPUT_REPO']}/actions/artifacts"
-print(f"retrieving artifacts from repo {repo}")
-artifacts = requests.get(repo).json()['artifacts']
 
+print(f"retrieving artifacts from repo {repo}")
+
+artifacts = requests.get(repo).json()['artifacts']
 latest = parser.isoparse(artifacts[-1]['updated_at'])
 artifact_url = artifacts[-1]["archive_download_url"]
 for art in artifacts:
