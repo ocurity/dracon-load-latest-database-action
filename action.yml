@@ -8,7 +8,7 @@ inputs:
   REPO_URL: 
     description: 'which repo to download artifacts from'
     required: false
-    default: ${{ github.repository }}
+    default: https://github.com/${{ github.repository }}
   OUTPUT_DIR:  # id of input
     description: 'Where to dump the db'
     required: false
