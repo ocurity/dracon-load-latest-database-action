@@ -4,7 +4,7 @@ import os
 import zipfile
 from pprint import pprint
 
-repo=os.eniron["INPUT_REPO_URL"]
+repo=os.environ["INPUT_REPO_URL"]
 artifacts = requests.get(repo).json()['artifacts']
 
 latest = parser.isoparse(artifacts[-1]['updated_at'])
