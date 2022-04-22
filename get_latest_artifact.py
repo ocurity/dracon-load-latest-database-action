@@ -1,3 +1,4 @@
+
 import requests
 from dateutil import parser
 import os
@@ -23,10 +24,10 @@ token = os.environ["INPUT_GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
 if resp.status_code != 200:
-    print("Error receiving files")
+    print("Error receiving files for artifact %s"%artifact_url)
     pprint(requests.get(artifact_url).json())
-    exit(1)
-    
+    raise ValueError
+
 with open("/tmp/latest.zip", "wb") as fl:
     for chunk in resp.iter_content():
         fl.write(chunk)
