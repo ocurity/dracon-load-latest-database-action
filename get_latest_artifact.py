@@ -22,9 +22,9 @@ for art in artifacts:
 token = os.environ["INPUT_GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
-with open("/tmp/latest.zip", "wb") as zip:
+with open("/tmp/latest.zip", "wb") as fl:
     for chunk in resp.iter_content():
-        zip.write(chunk)
+        fl.write(chunk)
 
 with zipfile.ZipFile("/tmp/latest.zip") as zip:
     print("Extracting files to %s"%os.environ["INPUT_OUTPUT_DIR"])
