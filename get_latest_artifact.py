@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 from dateutil import parser
 import os
@@ -23,6 +22,7 @@ for art in artifacts:
 token = os.environ["INPUT_GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
+pprint(resp.status_code)
 with open("/tmp/latest.zip", "wb") as fl:
     for chunk in resp.iter_content():
         fl.write(chunk)
