@@ -22,8 +22,7 @@ for art in artifacts:
         artifact_url = art["archive_download_url"]
 
 token = os.environ["INPUT_GH_ACCESS_TOKEN"]
-header={"Authorization" :"token %s"%token}
-resp = requests.get(artifact_url, stream=True,headers=header)
+resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
 if resp.status_code != 200:
     print("Error receiving files for artifact %s"%artifact_url)
     pprint(requests.get(artifact_url).json())
