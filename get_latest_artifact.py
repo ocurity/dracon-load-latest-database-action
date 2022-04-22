@@ -22,7 +22,11 @@ for art in artifacts:
 token = os.environ["INPUT_GH_ACCESS_TOKEN"]
 header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
-pprint(resp.status_code)
+if resp.status_code != 200:
+    print("Error receiving files")
+    pprint(requests.get(artifact_url).json())
+    exit(1)
+    
 with open("/tmp/latest.zip", "wb") as fl:
     for chunk in resp.iter_content():
         fl.write(chunk)
@@ -34,7 +38,5 @@ try:
     print("Files extracted, dir contents are:")
     pprint(os.listdir(os.environ["INPUT_OUTPUT_DIR"]))
 except zipfile.BadZipFile as bzf:
-    # print("Could not download the artifact as zip message was: %s"%resp.json())
-    # pprint(resp.text)
     with open("/tmp/latest.zip") as l:
         pprint(l.read())
