@@ -34,7 +34,7 @@ try:
     print("Files extracted, dir contents are:")
     pprint(os.listdir(os.environ["INPUT_OUTPUT_DIR"]))
 except zipfile.BadZipFile as bzf:
-    print("Could not download the artifact as zip message was: %s"%resp.json)
-    pprint(resp.text)
+    # print("Could not download the artifact as zip message was: %s"%resp.json())
+    # pprint(resp.text)
     with open("/tmp/latest.zip") as l:
         pprint(l.read())
