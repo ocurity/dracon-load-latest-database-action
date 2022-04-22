@@ -4,7 +4,8 @@ from dateutil import parser
 import os
 import zipfile
 from pprint import pprint
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 repo=f"https://api.github.com/repos/{os.environ['INPUT_REPO']}/actions/artifacts"
 
 print(f"retrieving artifacts from repo {repo}")
@@ -20,8 +21,8 @@ for art in artifacts:
         latest = d
         artifact_url = art["archive_download_url"]
 
-# token = os.environ["INPUT_GH_ACCESS_TOKEN"]
-# header={"Authorization" :"token %s"%token}
+token = os.environ["INPUT_GH_ACCESS_TOKEN"]
+header={"Authorization" :"token %s"%token}
 resp = requests.get(artifact_url, stream=True,headers=header)
 if resp.status_code != 200:
     print("Error receiving files for artifact %s"%artifact_url)
