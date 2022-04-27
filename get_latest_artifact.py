@@ -14,7 +14,7 @@ artifacts = requests.get(repo).json()['artifacts']
 latest = parser.isoparse(artifacts[-1]['updated_at'])
 artifact_url = None
 for art in artifacts:
-    if art.expired == "true" and "dracon_enrichment_db" not in art["name"]:
+    if art["expired"] == "true" and "dracon_enrichment_db" not in art["name"]:
         continue
     d =parser.isoparse(art['updated_at'])
     if d > latest:
