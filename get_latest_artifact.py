@@ -23,7 +23,8 @@ for art in artifacts:
 
 pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
 token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
-for name, token in {"ACTIONS_RUNTIME_TOKEN": os.environ["ACTIONS_RUNTIME_TOKEN"],"INPUT_GH_ACCESS_TOKEN": os.environ["INPUT_GH_ACCESS_TOKEN"]}.items():
+for name, token in {"GH_ACCESS_TOKEN":os.environ["inputs.GH_ACCESS_TOKEN"],
+                    "INPUT_GH_ACCESS_TOKEN": os.environ["INPUT_GH_ACCESS_TOKEN"]}.items():
     pprint(f"Trying with {name}")
     pprint(f"{','.join([t for t in token])}")
     if len(token) == 0:
