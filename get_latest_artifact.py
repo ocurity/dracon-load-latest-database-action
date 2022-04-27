@@ -21,7 +21,7 @@ for art in artifacts:
         latest = d
         artifact_url = art["archive_download_url"]
 
-token = os.environ["INPUT_GH_ACCESS_TOKEN"]
+token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
 resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
 if resp.status_code != 200:
     print("Error receiving files for artifact %s"%artifact_url)
