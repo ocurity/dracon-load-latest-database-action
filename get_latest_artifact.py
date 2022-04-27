@@ -23,7 +23,10 @@ for art in artifacts:
 
 pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
 token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
-for token in [os.environ["ACTIONS_RUNTIME_TOKEN"], os.environ["INPUT_GH_ACCESS_TOKEN"]]:
+for name, token in {"ACTIONS_RUNTIME_TOKEN": os.environ["ACTIONS_RUNTIME_TOKEN"],"INPUT_GH_ACCESS_TOKEN": os.environ["INPUT_GH_ACCESS_TOKEN"]}:
+    pprint(f"Trying with {name}")
+    if len(token) == 0:
+        pprint("empty token")
     resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
     if resp.status_code == 200:
         break
