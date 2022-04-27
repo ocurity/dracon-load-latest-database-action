@@ -12,14 +12,18 @@ print(f"retrieving artifacts from repo {repo}")
 
 artifacts = requests.get(repo).json()['artifacts']
 latest = parser.isoparse(artifacts[-1]['updated_at'])
-artifact_url = artifacts[-1]["archive_download_url"]
+artifact_url = None
 for art in artifacts:
-    if "dracon_enrichment_db" not in art["name"]:
+    if art.expired == "true" and "dracon_enrichment_db" not in art["name"]:
         continue
     d =parser.isoparse(art['updated_at'])
     if d > latest:
         latest = d
         artifact_url = art["archive_download_url"]
+
+if not artifact_url:
+    print("Did not find a Dracon DB, this is not fatal as the enricher will create it, exiting")
+    exit(0)
 
 pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
 token =  os.environ["INPUT_GH_ACCESS_TOKEN"]
