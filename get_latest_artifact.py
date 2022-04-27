@@ -5,7 +5,7 @@ import os
 import zipfile
 from pprint import pprint
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 repo=f"https://api.github.com/repos/{os.environ['INPUT_REPO']}/actions/artifacts"
 
 print(f"retrieving artifacts from repo {repo}")
