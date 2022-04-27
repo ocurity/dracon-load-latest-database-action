@@ -20,7 +20,10 @@ for art in artifacts:
     if d > latest:
         latest = d
         artifact_url = art["archive_download_url"]
-
+pprint(f"using ACTIONS_RUNTIME_TOKEN ")
+pprint([f for f in os.environ["ACTIONS_RUNTIME_TOKEN"]])
+pprint([f for f in os.environ["INPUT_GH_ACCESS_TOKEN"]])
+pprint([f for f in os.environ.items()])
 token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
 resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
 if resp.status_code != 200:
