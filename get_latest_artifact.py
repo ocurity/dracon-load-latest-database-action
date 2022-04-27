@@ -23,17 +23,13 @@ for art in artifacts:
 
 pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
 token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
-for name, token in {"GH_ACCESS_TOKEN":os.environ["GH_ACCESS_TOKEN"],
-                    "INPUT_GH_ACCESS_TOKEN": os.environ["INPUT_GH_ACCESS_TOKEN"]}.items():
-    pprint(f"Trying with {name}")
-    pprint(f"{','.join([t for t in token])}")
-    if len(token) == 0:
-        pprint("empty token")
-    resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
-    if resp.status_code == 200:
-        pprint("success!!!!")
-        break
-if resp.status_code != 200:
+pprint(f"{','.join([t for t in token])}")
+if len(token) == 0:
+    pprint("empty token")
+resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
+if resp.status_code == 200:
+    pprint("success!!!!")
+elif resp.status_code != 200:
     print("Error receiving files for artifact %s"%artifact_url)
     print(resp.status_code)
     pprint(requests.get(artifact_url).json())
