@@ -22,7 +22,7 @@ for art in artifacts:
         artifact_url = art["archive_download_url"]
 
 pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
-token = os.environ["ACTIONS_RUNTIME_TOKEN"] # os.environ["INPUT_GH_ACCESS_TOKEN"]
+token =  os.environ["INPUT_GH_ACCESS_TOKEN"]
 pprint(f"{','.join([t for t in token])}")
 if len(token) == 0:
     pprint("empty token")
