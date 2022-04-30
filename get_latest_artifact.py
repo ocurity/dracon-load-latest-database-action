@@ -27,7 +27,6 @@ if not artifact_url:
 
 
 token =  os.environ["INPUT_GH_ACCESS_TOKEN"]
-pprint(f"{','.join([t for t in token])}")
 if len(token) == 0:
     pprint("empty token")
 resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
