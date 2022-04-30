@@ -25,17 +25,16 @@ if not artifact_url:
     print("Did not find a Dracon DB, this is not fatal as the enricher will create it, exiting")
     exit(0)
 
-pprint( os.environ["ACTIONS_RUNTIME_TOKEN"] == os.environ["INPUT_GH_ACCESS_TOKEN"])
+
 token =  os.environ["INPUT_GH_ACCESS_TOKEN"]
 pprint(f"{','.join([t for t in token])}")
 if len(token) == 0:
     pprint("empty token")
 resp = requests.get(artifact_url, stream=True,headers={"Authorization" :"token %s"%token})
 if resp.status_code == 200:
-    pprint("success!!!!")
+    pprint("success! Downloaded latest enrichment database")
 elif resp.status_code != 200:
-    print("Error receiving files for artifact %s"%artifact_url)
-    print(resp.status_code)
+    print(f"Error receiving files for artifact {artifact_url}  status code was {resp.status_code}, error message is:")
     pprint(requests.get(artifact_url).json())
     raise ValueError
 
