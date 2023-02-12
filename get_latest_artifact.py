@@ -14,7 +14,7 @@ artifacts = requests.get(repo).json().get('artifacts')
 
 if not artifacts:
   print("Did not find a Dracon DB, this is not fatal as the enricher will create it, exiting")
-   exit(0)
+  exit(0)
 
 latest = parser.isoparse(artifacts[-1]['updated_at'])
 artifact_url = None
