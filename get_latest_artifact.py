@@ -10,7 +10,12 @@ repo=f"https://api.github.com/repos/{os.environ['INPUT_REPO']}/actions/artifacts
 
 print(f"retrieving artifacts from repo {repo}")
 
-artifacts = requests.get(repo).json()['artifacts']
+artifacts = requests.get(repo).json().get('artifacts')
+
+if not artifacts:
+  print("Did not find a Dracon DB, this is not fatal as the enricher will create it, exiting")
+   exit(0)
+
 latest = parser.isoparse(artifacts[-1]['updated_at'])
 artifact_url = None
 for art in artifacts:
